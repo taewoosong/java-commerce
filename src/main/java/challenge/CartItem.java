@@ -1,4 +1,4 @@
-package lv01;
+package challenge;
 
 public class CartItem {
     private final Product product;

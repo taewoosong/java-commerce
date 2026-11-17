@@ -1,4 +1,4 @@
-package lv01;
+package challenge;
 
 import java.util.List;
 import java.util.Scanner;

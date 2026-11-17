@@ -1,4 +1,4 @@
-package lv01;
+package challenge;
 
 public class Customer {
     private String name;

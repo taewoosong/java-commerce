@@ -1,4 +1,4 @@
-package lv01;
+package challenge;
 
 // 개별 상품 정보(상품명, 가격, 설명, 재고)를 관리하는 클래스
 public class Product {
