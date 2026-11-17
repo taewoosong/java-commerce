@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class CommerceSystem {
     private final List<Category> categories;
+    private final Scanner sc = new Scanner(System.in);
 
     public CommerceSystem(List<Category> categories) {
         this.categories = categories;
@@ -12,8 +13,6 @@ public class CommerceSystem {
 
     public void start() {
         int input = 0;
-        Scanner sc = new Scanner(System.in);
-
         while (true) {
 
             System.out.println("[ 카테고리 목록 출력 ]");
@@ -46,9 +45,8 @@ public class CommerceSystem {
         }
     }
 
-    public void showProducts(Category category){
+    private void showProducts(Category category){
         int input = 0;
-        Scanner sc = new Scanner(System.in);
         List<Product> products = category.getProducts();
 
         while(true){
@@ -75,7 +73,7 @@ public class CommerceSystem {
             return;
         } else if (input >= 1 && input <= products.size()) {
             Product selected = products.get(input - 1);
-            System.out.println(selected.getInfo());
+            System.out.println("선택한 상품: " + selected.getInfo() +  " | 재고: " + selected.getStock() + "개");
         } else {
             System.out.println("잘못된 입력입니다.");
         }
