@@ -7,6 +7,13 @@ public class Cart {
     private final List<CartItem> items = new ArrayList<>();
 
     public void addItem(Product product , int quantity){
+
+        for(int i = 0; i < items.size(); i++){
+            if(items.get(i).getProduct() == product){
+                items.get(i).addQuantity(quantity);
+                return;
+            }
+        }
         items.add(new CartItem(product, quantity));
     }
 

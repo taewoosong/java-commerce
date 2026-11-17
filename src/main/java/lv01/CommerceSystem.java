@@ -77,7 +77,16 @@ public class CommerceSystem {
                 continue;
             }
             if(input == 1){
-                System.out.println("주문이 확정되었습니다.");
+                System.out.println("주문이 확정되었습니다. 총 금액 : " + String.format("%,d원" , cart.getTotalPrice()));
+                for(int i = 0; i < cart.getItems().size(); i++){
+                    CartItem item = cart.getItems().get(i);
+                    Product product = item.getProduct();
+                    int before = product.getStock();
+                    product.decreaseStock(item.getQuantity());
+                    System.out.println(item.getProduct().getName()+"재고가 " + before +" 개-> "
+                            + product.getStock() + " 로 업데이트 되었습니다.");
+                }
+                cart.clear();
                 return;
             }else if(input == 2){
                 System.out.println("메인으로 돌아갑니다.");

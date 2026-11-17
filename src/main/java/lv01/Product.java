@@ -13,6 +13,14 @@ public class Product {
         this.stock = stock;
     }
 
+    public void decreaseStock(int quantity){
+        if(quantity > stock){
+            System.out.println("재고가 부족합니다.");
+        }else {
+            this.stock -= quantity;
+        }
+    }
+
     public String getName() {
         return name;
     }
