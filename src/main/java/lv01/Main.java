@@ -14,7 +14,8 @@ public class Main {
         List<Category> categoryList = new ArrayList<>();
 
 
-        electronicsProducts.add(new Product("GalaxyS25" , 1200000 , "최신 안드로이드 스마트폰" , 25));
+        // 카테고리별 상품 목록 생성 (전자제품, 의류, 식품)
+        electronicsProducts.add(new Product("GalaxyS25" , 1200000 , "최신 안드로이드 스마트폰" , 1));
         electronicsProducts.add(new Product("iPhone" , 1350000 , "Apple의 최신 스마트폰" , 30));
         electronicsProducts.add(new Product("MacBook Pro" , 2400000 ,"M3 칩셋이 탑재된 노트북", 15));
         electronicsProducts.add(new Product("AirPods Pro" , 350000 , "노이즈 캔슬링 무선 이어폰" , 50));

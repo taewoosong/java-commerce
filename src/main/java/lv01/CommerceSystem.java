@@ -159,6 +159,10 @@ public class CommerceSystem {
                 System.out.println("이전메뉴로 돌아갑니다.");
                 return;
             }else if(input == 1){
+                if(cart.getQuantity(product) + 1 > product.getStock()){
+                    System.out.println("재고가 부족합니다.");
+                    return;
+                }
                 cart.addItem(product , 1);
                 System.out.println(product.getName() + "상품이 추가되었습니다.");
                 return;

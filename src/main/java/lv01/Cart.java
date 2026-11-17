@@ -36,5 +36,14 @@ public class Cart {
     public void clear(){
         items.clear();
     }
+
+    public int getQuantity(Product product){
+        for(int i = 0; i < items.size(); i++) {
+            if(items.get(i).getProduct() == product){
+                return items.get(i).getQuantity();
+            }
+        }
+        return 0;
+    }
 }
 
