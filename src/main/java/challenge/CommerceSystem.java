@@ -44,7 +44,7 @@ public class CommerceSystem {
             } else if (input >= 1 && input <= categories.size()) {
                 Category selected = categories.get(input - 1);
                 System.out.println(selected.getName());
-                showProducts(selected);
+                showCategoryMenu(selected);
             } else if (input == 4) {
                 showCart();
             } else if (input == 5) {
@@ -97,13 +97,12 @@ public class CommerceSystem {
         System.out.println("주문이 취소 되었습니다.");
     }
 
-    private void showProducts(Category category) {
+    private void showProducts(String title, List<Product> products) {
         int input = 0;
-        List<Product> products = category.getProducts();
 
         while (true) {
 
-            System.out.println("[ 실시간 커머스 플랫폼 -  " + category.getName() + " ] ");
+            System.out.println("[ " + title + " ]");
             // 반복문 실행시켜 메뉴 출력
             for (int i = 0; i < products.size(); i++) {
                 System.out.println((i + 1) + " , " + products.get(i).getInfo());
@@ -207,5 +206,36 @@ public class CommerceSystem {
                     + product.getStock() + " 로 업데이트 되었습니다.");
         }
         cart.clear();
+    }
+
+    private void showCategoryMenu(Category category){
+        int input = 0;
+
+        while (true) {
+            System.out.println("[ " + category.getName() + " 카테고리 ]");
+            System.out.println("1. 전체 상품 보기");
+            System.out.println("2. 가격대별 필터링 (100만원 이하)");
+            System.out.println("3. 가격대별 필터링 (100만원 초과)");
+            System.out.println("0. 뒤로가기");
+
+            try {
+                input = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("숫자만 입력하세요");
+                continue;
+            }
+
+            if(input == 0){
+                return;
+            }else if(input == 1){
+                showProducts(category.getName() + " 전체 상품", category.getProducts());
+            }else if(input == 2){
+                showProducts("100만원 이하 상품" ,category.getProductsUnder(1000000));
+            }else if(input == 3){
+                showProducts( "100만원 초과 상품" ,category.getProductsOver(1000000));
+            }else {
+                System.out.println("잘못된 입력입니다.");
+            }
+        }
     }
 }

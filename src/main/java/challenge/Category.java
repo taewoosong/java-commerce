@@ -20,4 +20,16 @@ public class Category{
     public List<Product> getProducts() {
         return products;
     }
+
+    public List<Product> getProductsUnder(int price){
+        return products.stream()
+                .filter(product ->  product.getPrice() <= price)
+                .toList();
+    }
+
+    public List<Product> getProductsOver(int price){
+        return products.stream()
+                .filter(product -> product.getPrice() > price)
+                .toList();
+    }
 }
