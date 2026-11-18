@@ -280,7 +280,7 @@ public class CommerceSystem {
             } else if (input == 3) {
                 System.out.println("준비중입니다.");
             } else if (input == 4) {
-                System.out.println("준비중입니다.");
+                showAllProducts();
             }else{
                 System.out.println("잘못된 입력입니다.");
             }
@@ -363,6 +363,17 @@ public class CommerceSystem {
                 return;
             }else{
                 System.out.println("잘못된 입력입니다.");
+            }
+        }
+    }
+
+    private void showAllProducts(){
+        System.out.println("전체 상품 현황");
+        for(int i = 0; i < categories.size(); i++){
+            System.out.println("["+categories.get(i).getName() +"]");
+            for(int j= 0; j < categories.get(i).getProducts().size(); j++){
+                System.out.println(j+1+ "." + categories.get(i).getProducts().get(j).getInfo() +
+                        " | 재고: " + categories.get(i).getProducts().get(j).getStock() + "개");
             }
         }
     }
