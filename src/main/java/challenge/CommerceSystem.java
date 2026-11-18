@@ -8,6 +8,7 @@ public class CommerceSystem {
     private final List<Category> categories;
     private final Scanner sc = new Scanner(System.in);
     private final Cart cart = new Cart();
+    private static final String ADMIN_PASSWORD = "admin123";
 
     public CommerceSystem(List<Category> categories) {
         this.categories = categories;
@@ -23,6 +24,7 @@ public class CommerceSystem {
                 System.out.println((i + 1) + " , " + categories.get(i).getName());
             }
             System.out.println("0. 종료      | 프로그램 종료");
+            System.out.println("6. 관리자 모드");
             if (!cart.isEmpty()) {
                 System.out.println("[ 주문 관리 ]");
                 System.out.println("4. 장바구니 확인");
@@ -50,7 +52,9 @@ public class CommerceSystem {
                 showCart();
             } else if (input == 5) {
                 cancelOrder();
-            } else {
+            } else if (input == 6) {
+                adminLogin();
+            }else {
                 System.out.println("잘못된 입력입니다.");
             }
         }
@@ -248,5 +252,52 @@ public class CommerceSystem {
                 System.out.println("잘못된 입력입니다.");
             }
         }
+    }
+
+    private void showAdminMenu(){
+        int input = 0;
+        while(true){
+            System.out.println("[ 관리자 모드 ]");
+            System.out.println("[ 1. 상품 추가 ]");
+            System.out.println("[ 2. 상품 수정 ]");
+            System.out.println("[ 3. 상품 삭제 ]");
+            System.out.println("[ 4. 전체 상품 현황 ]");
+            System.out.println("[ 0. 메인으로 돌아가기 ]");
+
+            try {
+                input = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("숫자만 입력하세요");
+                continue;
+            }
+
+            if (input == 0) {
+                return;
+            }else if(input == 1){
+                System.out.println("준비중입니다.");
+            } else if (input == 2) {
+                System.out.println("준비중입니다.");
+            } else if (input == 3) {
+                System.out.println("준비중입니다.");
+            } else if (input == 4) {
+                System.out.println("준비중입니다.");
+            }else{
+                System.out.println("잘못된 입력입니다.");
+            }
+        }
+    }
+
+    private void adminLogin(){
+        for(int i= 1; i <=3; i++){
+            System.out.println("관리자 비밀번호를 입력해주세요 : ");
+            String passWord = sc.nextLine();
+            if(passWord.equals(ADMIN_PASSWORD)){
+                showAdminMenu();
+                return;
+            }else{
+                System.out.println("비밀번호가 틀렷습니다. (" + i + "/3)");
+            }
+        }
+        System.out.println("메인을 돌아갑니다.");
     }
 }
