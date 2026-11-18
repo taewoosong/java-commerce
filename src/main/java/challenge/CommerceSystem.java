@@ -1,5 +1,6 @@
 package challenge;
 
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Scanner;
 
@@ -69,7 +70,7 @@ public class CommerceSystem {
         System.out.println(String.format("%,d원", cart.getTotalPrice()));
 
         while (true) {
-            System.out.println("1. 주문 확정 , 2. 메인으로 돌아가기");
+            System.out.println("1. 주문 확정 , 2. 메인으로 돌아가기 , 3. 상품 제거");
             try {
                 input = Integer.parseInt(sc.nextLine());
             } catch (NumberFormatException e) {
@@ -82,7 +83,17 @@ public class CommerceSystem {
             } else if (input == 2) {
                 System.out.println("메인으로 돌아갑니다.");
                 return;
-            } else {
+            } else if (input == 3){
+                System.out.println("제거할 상품명을 입력하세요 : ");
+                String name = sc.nextLine();
+                if(cart.removeItem(name)){
+                    System.out.println("장바구니에서 제거되었습니다.");
+                }else{
+                    System.out.println("해당 상품이 장바구니에 없습니다.");
+                }
+                return;
+            }
+            else {
                 System.out.println("잘못된 입력입니다.");
             }
         }

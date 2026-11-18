@@ -45,5 +45,9 @@ public class Cart {
         }
         return 0;
     }
+
+    public boolean removeItem(String productName){
+        return items.removeIf(item -> item.getProduct().getName().equals(productName));
+    }
 }
 
