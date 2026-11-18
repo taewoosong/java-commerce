@@ -276,7 +276,7 @@ public class CommerceSystem {
             }else if(input == 1){
                 showAddProductMenu();
             } else if (input == 2) {
-                System.out.println("준비중입니다.");
+                showUpdateProductMenu();
             } else if (input == 3) {
                 showRemoveProductMenu();
             } else if (input == 4) {
@@ -428,6 +428,89 @@ public class CommerceSystem {
             }
         }
     }
+
+    private void showUpdateProductMenu() {
+        int input = 0;
+        while (true) {
+            System.out.println(" [ 상품을 수정할 카테고리 ] ");
+            for (int i = 0; i < categories.size(); i++) {
+                System.out.println((i + 1) + " , " + categories.get(i).getName());
+            }
+            System.out.println("0. 취소");
+
+            try {
+                input = Integer.parseInt(sc.nextLine());
+            }catch (NumberFormatException e) {
+                System.out.println("숫자만 입력하세요");
+                continue;
+            }
+            if(input == 0){
+                return;
+            } else if (input >= 1 && input <= categories.size()) {
+                Category selected = categories.get(input - 1);
+                for(int j = 0; j < selected.getProducts().size(); j++){
+                    System.out.println(j+1+ " . " + selected.getProducts().get(j).getName());
+                }
+                System.out.println("0. 취소");
+                System.out.println("수정할 상품 번호를 입력하세요 : ");
+                try {
+                    input = Integer.parseInt(sc.nextLine());
+                }catch (NumberFormatException e) {
+                    System.out.println("숫자만 입력하세요");
+                    return;
+                }
+                if(input == 0) {
+                    return;
+                } else if (input >= 1 && input <= selected.getProducts().size()) {
+                    Product target = selected.getProducts().get(input -1);
+                    System.out.println("현재 정보 : " +target.getInfo() + " | 재고: " + target.getStock() + "개");
+                    System.out.println("1.가격  2.설명  3.재고");
+                    System.out.println("수정할 항목을 선택하세요 : ");
+                    try {
+                        input = Integer.parseInt(sc.nextLine());
+                    }catch (NumberFormatException e) {
+                        System.out.println("숫자만 입력하세요.");
+                        return;
+                    }
+                    if (input == 1 ){
+                        System.out.println("새 가격을 입력하세요 : ");
+                        try {
+                            input = Integer.parseInt(sc.nextLine());
+                        }catch (NumberFormatException e) {
+                            System.out.println("숫자만 입력하세요.");
+                            return;
+                        }
+                        target.updatePrice(input);
+                    }else if(input == 2){
+                        System.out.println("새 설명을 입력하세요 : ");
+                        String explanation = sc.nextLine();
+                        target.updateDescription(explanation);
+                    }else if(input == 3){
+                        System.out.println("새 재고를 입력하세요 : ");
+                        try {
+                            input = Integer.parseInt(sc.nextLine());
+                        }catch (NumberFormatException e) {
+                            System.out.println("숫자만 입력하세요.");
+                            return;
+                        }
+                        target.updateStock(input);
+                    }else{
+                        System.out.println("잘못된 입력입니다.");
+                        return;
+                    }
+                    System.out.println("수정 후 정보 : " + target.getInfo() + " | 재고: " + target.getStock() + "개");
+                    return;
+                }else {
+                    System.out.println("잘못된 입력입니다.");
+                    return;
+                }
+            }else{
+                System.out.println("잘못된 입력입니다.");
+                return;
+            }
+        }
+    }
+
 
     private void showAllProducts(){
         System.out.println("전체 상품 현황");

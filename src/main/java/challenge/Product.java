@@ -23,6 +23,27 @@ public class Product {
         }
     }
 
+    public void updatePrice(int price){
+        if(price <= 0){
+            System.out.println("상품가격은 0원보다 커야 합니다.");
+            return;
+        }
+        this.price = price;
+    }
+
+    public void updateDescription(String description){
+        this.description = description;
+    }
+
+    public void updateStock(int stock){
+        if(stock < 0){
+            System.out.println("재고는 0개 이상이어야 합니다.");
+            return;
+        }
+        this.stock = stock;
+    }
+
+
     public String getName() {
         return name;
     }
