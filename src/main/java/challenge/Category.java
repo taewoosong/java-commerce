@@ -37,6 +37,10 @@ public class Category{
         products.add(product);
     }
 
+    public void removeProduct(Product product){
+        products.remove(product);
+    }
+
 
     public boolean hasProduct(String name){
         for(int i =0 ; i < products.size(); i++){

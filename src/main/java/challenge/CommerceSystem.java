@@ -278,7 +278,7 @@ public class CommerceSystem {
             } else if (input == 2) {
                 System.out.println("준비중입니다.");
             } else if (input == 3) {
-                System.out.println("준비중입니다.");
+                showRemoveProductMenu();
             } else if (input == 4) {
                 showAllProducts();
             }else{
@@ -363,6 +363,68 @@ public class CommerceSystem {
                 return;
             }else{
                 System.out.println("잘못된 입력입니다.");
+            }
+        }
+    }
+
+    private void showRemoveProductMenu() {
+        int input = 0;
+        while (true) {
+            System.out.println(" [ 상품을 삭제할 카테고리 ] ");
+            for (int i = 0; i < categories.size(); i++) {
+                System.out.println((i + 1) + " , " + categories.get(i).getName());
+            }
+            System.out.println("0. 취소");
+
+            try {
+                input = Integer.parseInt(sc.nextLine());
+            }catch (NumberFormatException e) {
+                System.out.println("숫자만 입력하세요");
+                continue;
+            }
+            if(input == 0){
+                return;
+            } else if (input >= 1 && input <= categories.size()) {
+                Category selected = categories.get(input - 1);
+                for(int j = 0; j < selected.getProducts().size(); j++){
+                    System.out.println(j+1+ " . " + selected.getProducts().get(j).getName());
+                }
+                System.out.println("0. 취소");
+                System.out.println("삭제할 상품 번호를 입력하세요 : ");
+                try {
+                    input = Integer.parseInt(sc.nextLine());
+                }catch (NumberFormatException e) {
+                    System.out.println("숫자만 입력하세요");
+                    return;
+                }
+                if(input == 0) {
+                    return;
+                } else if (input >= 1 && input <= selected.getProducts().size()) {
+                    Product target = selected.getProducts().get(input -1);
+                    System.out.println("[ " + target.getName() + " ] 을(를) 삭제하시겠습니까?");
+                    System.out.println("1.확인      2.취소");
+                    try {
+                        input = Integer.parseInt(sc.nextLine());
+                    }catch (NumberFormatException e) {
+                        System.out.println("숫자만 입력하세요.");
+                        return;
+                    }
+                    if (input == 1 ){
+                        selected.removeProduct(target);
+                        cart.removeItem(target.getName());
+                        System.out.println("삭제되엇습니다.");
+                    }else {
+                        System.out.println("취소되엇습니다.");
+                        return;
+                    }
+                    return;
+                }else {
+                    System.out.println("잘못된 입력입니다.");
+                    return;
+                }
+            }else{
+                System.out.println("잘못된 입력입니다.");
+                return;
             }
         }
     }
