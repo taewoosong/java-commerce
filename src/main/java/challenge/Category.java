@@ -32,4 +32,18 @@ public class Category{
                 .filter(product -> product.getPrice() > price)
                 .toList();
     }
+
+    public void addProduct(Product product){
+        products.add(product);
+    }
+
+
+    public boolean hasProduct(String name){
+        for(int i =0 ; i < products.size(); i++){
+            if(products.get(i).getName().equals(name)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

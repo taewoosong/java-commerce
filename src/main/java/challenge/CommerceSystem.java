@@ -274,7 +274,7 @@ public class CommerceSystem {
             if (input == 0) {
                 return;
             }else if(input == 1){
-                System.out.println("준비중입니다.");
+                showAddProductMenu();
             } else if (input == 2) {
                 System.out.println("준비중입니다.");
             } else if (input == 3) {
@@ -299,5 +299,71 @@ public class CommerceSystem {
             }
         }
         System.out.println("메인을 돌아갑니다.");
+    }
+
+    private void showAddProductMenu(){
+        int input = 0;
+        int price = 0;
+        int stock = 0;
+        while (true) {
+            System.out.println(" [ 상품을 추가할 카테고리 ] ");
+            for (int i = 0; i < categories.size(); i++) {
+                System.out.println((i + 1) + " , " + categories.get(i).getName());
+            }
+            System.out.println("0. 취소");
+            try {
+                input = Integer.parseInt(sc.nextLine());
+            }catch (NumberFormatException e) {
+                System.out.println("숫자만 입력하세요");
+                continue;
+            }
+            if(input == 0){
+                return;
+            } else if (input >= 1 && input <= categories.size()) {
+                Category selected = categories.get(input - 1);
+                System.out.println(selected.getName());
+                System.out.println("상품명을 입력해 주세요 : ");
+                String name = sc.nextLine();
+                if(selected.hasProduct(name)){
+                    System.out.println("이미 존재하는 상품입니다.");
+                    return;
+                }
+                System.out.println("가격을 입력해 주세요 : ");
+                try {
+                    price = Integer.parseInt(sc.nextLine());
+                }catch (NumberFormatException e) {
+                    System.out.println("숫자만 입력하세요");
+                    return;
+                }
+                System.out.println("설명을 입력해 주세요 : ");
+                String explanation = sc.nextLine();
+                System.out.println("재고를 입력해 주세요 : ");
+                try {
+                    stock = Integer.parseInt(sc.nextLine());
+                }catch (NumberFormatException e) {
+                    System.out.println("숫자만 입력하세요");
+                    return;
+                }
+                System.out.println(name + " | " + String.format("%,d",price) + "원 | " + explanation + " | 재고 : " + stock + " 개 ");
+                System.out.println("위 정보로 상품을 추가하시겠습니까 ? ");
+                System.out.println("1.확인      2.취소");
+                try {
+                    input = Integer.parseInt(sc.nextLine());
+                }catch (NumberFormatException e) {
+                    System.out.println("숫자만 입력하세요.");
+                    return;
+                }
+                if (input == 1) {
+                    Product product = new Product(name , price , explanation , stock);
+                    selected.addProduct(product);
+                    System.out.println("추가되었습니다.");
+                }else {
+                    System.out.println("취소되었습니다.");
+                }
+                return;
+            }else{
+                System.out.println("잘못된 입력입니다.");
+            }
+        }
     }
 }
